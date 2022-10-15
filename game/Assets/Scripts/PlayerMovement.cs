@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Vector3 Velocity { get; private set; }
+    private Vector3 _currentVelocity;
 
     public Joystick joystick;
     Rigidbody2D rigidbody2D;
@@ -14,7 +14,9 @@ public class PlayerMovement : MonoBehaviour
     private bool _leftDown;
     private bool _rightDown;
 
-    public float _movementSpeed = 10f;
+    public float movementSpeed = 100f;
+    public float jumpForce = 100f;
+    public float downForce = 50f;
     private float _horizontalInput;
     private float _verticalInput;
 
@@ -28,18 +30,26 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate() {
         Jump();
+        ShiftDown();
         MovePlayer(); 
     }
 
     private void MovePlayer() {
 
-        transform.Translate(new Vector3(_horizontalInput, 0, 0) * _movementSpeed * Time.deltaTime);
+        transform.Translate(new Vector3(_horizontalInput, 0, 0) * movementSpeed * Time.deltaTime);
         _horizontalInput = joystick.Horizontal;
     }
 
     public void Jump() {
-        if (/*IsGrounded && */(joystick.Vertical > 0.3f /* || Jump pressed */)) { 
+        if (IsGrounded.isGrounded && (joystick.Vertical > 0.3f  || JumpPressed.jumpPressed)) {
+            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+        }
+    }
 
+    public void ShiftDown() {
+        //TODO: momentum stacking verhindern
+        if(!IsGrounded.isGrounded && (joystick.Vertical < -0.3f /*|| ShiftDownButtonPressed*/)) {
+            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, -downForce), ForceMode2D.Impulse);
         }
     }
 
