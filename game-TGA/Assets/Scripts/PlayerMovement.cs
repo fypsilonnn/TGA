@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     private float _horizontalSpeed;
     private float _verticalInput;
 
+    public float maxRotation = 30;
+
     private void Start() {
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
@@ -33,22 +35,25 @@ public class PlayerMovement : MonoBehaviour
         Jump();
         ShiftDown();
         MovePlayer();
+        RotationController();
     }
 
     private void MovePlayer() {
-        transform.Translate(new Vector3(_horizontalInput, 0, 0) * movementSpeed * Time.deltaTime);
+        if ((!IsTouchingLeftWall.isTouchingLeftWall && !IsTouchingRightWall.isTouchingRightWall) || (IsTouchingLeftWall.isTouchingLeftWall && _horizontalInput >= 0) || (IsTouchingRightWall.isTouchingRightWall && _horizontalInput <= 0)) {
+            transform.Translate(new Vector3(_horizontalInput, 0, 0) * movementSpeed * Time.deltaTime);
+        }
         _horizontalInput = joystick.Horizontal;
         _horizontalSpeed = _horizontalInput * movementSpeed;
     }
 
-    public void Jump() {
+    private void Jump() {
         if (IsGrounded.isGrounded && (joystick.Vertical > 0.3f  || JumpPressed.jumpPressed) && rigidbody2D.velocity.y == 0f) {
             rigidbody2D.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
             animator.SetBool("IsJumping", true);
         }
     }
 
-    public void ShiftDown() {
+    private void ShiftDown() {
         if(!IsGrounded.downShiftUsed && !IsGrounded.isGrounded && (joystick.Vertical < -0.3f /*|| ShiftDownButtonPressed*/)) {
             rigidbody2D.AddForce(new Vector2(0f, -downForce), ForceMode2D.Impulse);
             IsGrounded.downShiftUsed = true;
@@ -63,10 +68,18 @@ public class PlayerMovement : MonoBehaviour
         _horizontalInput = 1;
     }
 
-    public void AnimationHandler() {
+    private void AnimationHandler() {
         animator.SetFloat("Speed", Math.Abs(_horizontalSpeed));
         if(IsGrounded.isGrounded) {
             animator.SetBool("IsJumping", false);
+        }
+    }
+
+    private void RotationController() {
+        if (rigidbody2D.rotation < -maxRotation) {
+            rigidbody2D.rotation = -maxRotation;
+        } else if (rigidbody2D.rotation > maxRotation) {
+            rigidbody2D.rotation = maxRotation;
         }
     }
 }
