@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IDataPersistence
 {
-    private Vector3 _currentVelocity;
+    private Vector3 _currentPosition;
 
     public Joystick joystick;
     Rigidbody2D rigidbody2D;
@@ -25,6 +25,19 @@ public class PlayerMovement : MonoBehaviour
     private float _verticalInput;
 
     public float maxRotation = 30;
+
+    public void LoadData(GameData data) {
+        _currentPosition.x = data.playerPosition[0];
+        _currentPosition.y = data.playerPosition[1];
+        _currentPosition.z = data.playerPosition[2];
+        rigidbody2D.position = _currentPosition;
+    }
+
+    public void SaveData(GameData data) {
+        data.playerPosition[0] = this._currentPosition.x;
+        data.playerPosition[1] = this._currentPosition.y;
+        data.playerPosition[2] = this._currentPosition.z;
+    }
 
     private void Start() {
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -44,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         }
         _horizontalInput = joystick.Horizontal;
         _horizontalSpeed = _horizontalInput * movementSpeed;
+        _currentPosition = rigidbody2D.position;
     }
 
     private void Jump() {
