@@ -5,13 +5,12 @@ using UnityEngine.UI;
 
 public class QuestHandler : MonoBehaviour, IDataPersistence
 {
-    public Text activeQuestOne;
-    public Text activeQuestTwo;
-    public Text activeQuestThree;
+    public Text activeQuest;
 
+    public List<string> questNames = new List<string>();
     public SerializableDictionary<string, bool> questProgress = new SerializableDictionary<string, bool>();
     public SerializableDictionary<string, bool> activeQuests = new SerializableDictionary<string, bool>();
-
+    public SerializableDictionary<string, string> questDescriptions = new SerializableDictionary<string, string>();
 
 
     void Start() {
@@ -21,6 +20,8 @@ public class QuestHandler : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data) {
         this.questProgress = data.questProgress;
         this.activeQuests = data.activeQuests;
+        //TODO - update Load and Save to questDescriptions
+        //TODO - make a savefile for the descriptions and make the program read it from there instead of the dictionary (?)
     }
 
     public void SaveData(GameData data) {
@@ -28,30 +29,19 @@ public class QuestHandler : MonoBehaviour, IDataPersistence
         data.activeQuests = this.activeQuests;
     }
 
-    public void markQuestFinished(string questName) {
-        if(this.questProgress.ContainsKey(questName) && this.activeQuests.ContainsKey(questName)) {
-            this.questProgress[questName] = true;
-            this.activeQuests[questName] = false;
+    public void markQuestFinished(string finishedQuest) {
+        if(this.questProgress.ContainsKey(finishedQuest) && this.activeQuests.ContainsKey(finishedQuest)) {
+            this.questProgress[finishedQuest] = true;
+            this.activeQuests[finishedQuest] = false;
 
-            string questDescription; //= get description of changed quest 
-
-            /*switch(questDescription) {
-                case activeDescriptionOne :
-                    break;
-                case:
-                    break;
-                case "2" :
-                    break;
-                default: 
-                    Debug.LogError("Something went wrong while trying to Update active quest descriptions.");
-                    break; */
-
-            if(questDescription.Equals(activeQuestOne.text)) {
-                //jeweiliges feld updaten
-            } else if (questDescription.Equals(activeQuestTwo.text)) {
-
-            } else if (questDescription.Equals(activeQuestThree.text)) {
-                
+            string descriptionToChange = questDescriptions[finishedQuest];
+            //check if there are more quests left after the one just finished, else say that there are no more quests 
+            if(descriptionToChange.Equals(activeQuest.text) && questNames.IndexOf(finishedQuest) < questNames.Count) {
+                activeQuest.text = questDescriptions[questNames[questNames.IndexOf(finishedQuest) + 1]];       //questNames.IndexOf(finishedQuest) + 1
+            } else if(questNames.IndexOf(finishedQuest) == questNames.Count) {
+                activeQuest.text = "There are no more quests to be done, you finished whats currently in the game";
+            } else {
+                Debug.LogError("Something went wrong while trying to update the quest description.");
             }
         }
     }
