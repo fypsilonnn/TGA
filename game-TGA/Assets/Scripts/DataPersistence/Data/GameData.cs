@@ -17,7 +17,10 @@ public class GameData
     public List<string> questNames;
 
     //saving and checking which quests are completed -> Dictionary
-    public SerializableDictionary<string, bool> questsCompleted;
+    public SerializableDictionary<string, bool> questProgress;
+
+    //saving which quests are active
+    public SerializableDictionary<string, bool> activeQuests;
 
     //values defined in constructor will be the default values
     //this is used by the game if there is no data to load
@@ -29,7 +32,20 @@ public class GameData
         playerPosition[1] = 750;    //y
         playerPosition[2] = 0;      //z
 
-        questNames = new List<string>();
-        questsCompleted = new SerializableDictionary<string, bool>();
+        questNames = new List<string> {
+            "1-1_meetOliver", 
+            "1-1_exampleQuest1", 
+            "1-1_deineMudda"
+        };
+
+        questProgress = new SerializableDictionary<string, bool>();
+        foreach(string name in questNames) {
+            questProgress.Add(name, false);
+        }
+        
+        activeQuests = new SerializableDictionary<string, bool>();
+        foreach(string name in questNames) {
+            activeQuests.Add(name, false);
+        }
     }
 }

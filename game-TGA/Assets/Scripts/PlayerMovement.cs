@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour, IDataPersistence
 {
+
+    #region vars
+
     private Vector3 _currentPosition;
 
     public Joystick joystick;
@@ -25,6 +28,8 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     private float _verticalInput;
 
     public float maxRotation = 30;
+
+    #endregion
 
     public void LoadData(GameData data) {
         _currentPosition.x = data.playerPosition[0];

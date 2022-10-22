@@ -50,7 +50,7 @@ public class DataPersistenceManager : MonoBehaviour
     }
 
     public void SaveGame() {
-        //TODO - pass the data to other scripts so they can update it
+        //pass the data to other scripts so they can update it
         foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects) {
             dataPersistenceObj.SaveData(gameData);
         }
