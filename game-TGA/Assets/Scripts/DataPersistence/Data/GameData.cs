@@ -50,17 +50,19 @@ public class GameData
         };
 
         descriptions = new List<string> {
-            "test",
+            "Meet Oliver at the beach",
             "Ich bin eine Testbeschreibung",
             "jaja deine Mutter und so"
         };
 
+        //<questName, hasFinished?>
         questProgress = new SerializableDictionary<string, bool>();
         foreach(string name in questNames) {
             questProgress.Add(name, false);
         }
         
         //TODO - denk dir was besseres aus
+        //<questName, questDescription>
         questDescriptions = new SerializableDictionary<string, string>();
         for(int i = 0; i < questNames.Count; i++) {
             questDescriptions.Add(questNames[i], descriptions[i]);

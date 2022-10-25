@@ -44,7 +44,7 @@ public class QuestHandler : MonoBehaviour, IDataPersistence
             //check if there are more quests left after the one just finished, else say that there are no more quests
             if(questNames.IndexOf(currentQuest) == questNames.Count - 1) {
                 activeQuest.text = "There are no more quests to be done, you finished what's currently in the game";
-            } else if(descriptionToChange.Equals(activeQuest.text) && questNames.IndexOf(currentQuest) < questNames.Count - 1 && questTriggers[currentQuest].Equals(trigger[questNames.IndexOf(currentQuest)].name)) {
+            } else if((descriptionToChange.Equals(activeQuest.text) || activeQuest.text.Equals("")) && questNames.IndexOf(currentQuest) < questNames.Count - 1 && questTriggers[currentQuest].Equals(trigger[questNames.IndexOf(currentQuest)].name)) {
                 activeQuest.text = questDescriptions[questNames[questNames.IndexOf(currentQuest) + 1]];
                 currentQuest = questNames[questNames.IndexOf(currentQuest) + 1];
             } else if(questTriggers[currentQuest].Equals(trigger[questNames.IndexOf(currentQuest)].name)) {
