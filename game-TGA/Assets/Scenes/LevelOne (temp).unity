@@ -285,7 +285,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &326928767
 RectTransform:
   m_ObjectHideFlags: 0
@@ -300,7 +300,6 @@ RectTransform:
   m_Children:
   - {fileID: 316041148}
   - {fileID: 1209932679}
-  - {fileID: 1889571386}
   - {fileID: 410253785}
   m_Father: {fileID: 1129129728}
   m_RootOrder: 1
@@ -537,6 +536,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 410253785}
+  - component: {fileID: 410253786}
   m_Layer: 5
   m_Name: Quests
   m_TagString: Untagged
@@ -557,14 +557,41 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1537232003}
+  - {fileID: 1889571386}
   m_Father: {fileID: 326928767}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &410253786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410253784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b9fe522b510e948822520286ddd2a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger:
+  - {fileID: 1140523603}
+  activeQuest: {fileID: 1537232004}
+  questNames:
+  - 
+  questProgress:
+    keys: []
+    values: 
+  questDescriptions:
+    keys: []
+    values: []
+  questTriggers:
+    keys: []
+    values: []
 --- !u!1 &478110696
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,7 +607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &478110697
 RectTransform:
   m_ObjectHideFlags: 0
@@ -826,7 +853,7 @@ Transform:
   m_GameObject: {fileID: 506298247}
   m_LocalRotation: {x: 0, y: 0, z: 0.17364816, w: 0.9848078}
   m_LocalPosition: {x: 698, y: 653, z: 0}
-  m_LocalScale: {x: 390.19672, y: 24.049128, z: 1}
+  m_LocalScale: {x: 390, y: 24, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1085,6 +1112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ece386f7582dd24ebb101db98f7ce47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wasSpokenTo: 0
   onClick:
     m_PersistentCalls:
       m_Calls:
@@ -2485,6 +2513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ece386f7582dd24ebb101db98f7ce47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wasSpokenTo: 0
   onClick:
     m_PersistentCalls:
       m_Calls:
@@ -2492,6 +2521,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 410253786}
+        m_TargetAssemblyTypeName: QuestHandler, Assembly-CSharp
+        m_MethodName: markQuestFinished
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2657,7 +2698,7 @@ Transform:
   m_GameObject: {fileID: 1159499313}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 362, y: 596, z: 0}
-  m_LocalScale: {x: 390.19672, y: 24.049128, z: 1}
+  m_LocalScale: {x: 390, y: 24, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3449,7 +3490,7 @@ Transform:
   m_GameObject: {fileID: 1358901350}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1009, y: 715, z: 0}
-  m_LocalScale: {x: 300.1967, y: 24.049128, z: 1}
+  m_LocalScale: {x: 300, y: 24, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3775,7 +3816,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1537232003
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3816,7 +3857,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quests
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4141,8 +4182,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 785704642}
-  m_Father: {fileID: 326928767}
-  m_RootOrder: 2
+  m_Father: {fileID: 410253785}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4193,7 +4234,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 410253784}
+      - m_Target: {fileID: 1537232002}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
