@@ -15,8 +15,6 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     public Joystick joystick;
     Rigidbody2D rigidbody2D;
 
-    public Animator animator;
-
     private bool _leftDown;
     private bool _rightDown;
 
@@ -49,7 +47,6 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     }
 
     private void FixedUpdate() {
-        AnimationHandler();
         Jump();
         ShiftDown();
         MovePlayer();
@@ -68,7 +65,6 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     private void Jump() {
         if (IsGrounded.isGrounded && (joystick.Vertical > 0.3f  || JumpPressed.jumpPressed) && rigidbody2D.velocity.y == 0f) {
             rigidbody2D.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
-            animator.SetBool("IsJumping", true);
         }
     }
 
@@ -85,13 +81,6 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
 
     public void InputRight() {
         _horizontalInput = 1;
-    }
-
-    private void AnimationHandler() {
-        animator.SetFloat("Speed", Math.Abs(_horizontalSpeed));
-        if(IsGrounded.isGrounded) {
-            animator.SetBool("IsJumping", false);
-        }
     }
 
     private void RotationController() {
