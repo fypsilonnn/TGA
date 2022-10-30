@@ -18,8 +18,8 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     private bool _leftDown;
     private bool _rightDown;
 
-    public float movementSpeed = 100f;
-    public float jumpForce = 100f;
+    public float movementSpeed = 200f;
+    public float jumpForce = 500f;
     public float downForce = 200f;
     private float _horizontalInput;
     private float _horizontalSpeed;
