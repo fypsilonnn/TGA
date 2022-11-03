@@ -552,7 +552,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 365821413}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1187,6 +1187,7 @@ GameObject:
   - component: {fileID: 611749221}
   - component: {fileID: 611749223}
   - component: {fileID: 611749222}
+  - component: {fileID: 611749224}
   m_Layer: 0
   m_Name: PopUp
   m_TagString: Untagged
@@ -1227,10 +1228,10 @@ MonoBehaviour:
   onClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 611749220}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 611749224}
+        m_TargetAssemblyTypeName: One_One_meetingOliver, Assembly-CSharp
+        m_MethodName: changeLines
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1265,6 +1266,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 25, y: 10}
   m_EdgeRadius: 0
+--- !u!114 &611749224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611749220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58219484d8940cf47ac18ea482efe13c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueLines:
+  - kjatrhgkjatr
+  - "f\xF6ljhoi"
+  - k.dfjbgbjhbdfjhbgthjg
+  - "fk\xF6jhgbkjydhbgyhj b"
+  - kjklgbjhklygiu589u7tu8
+  dialogueText: {fileID: 365821415}
+  player: {fileID: 8117358310120169215}
+  dialogueStandingPos: {x: 1090, y: 720, z: 0}
 --- !u!1 &657346655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1699,6 +1721,18 @@ MonoBehaviour:
       - m_Target: {fileID: 410253786}
         m_TargetAssemblyTypeName: QuestHandler, Assembly-CSharp
         m_MethodName: markQuestFinished
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 611749224}
+        m_TargetAssemblyTypeName: One_One_meetingOliver, Assembly-CSharp
+        m_MethodName: startConversation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2464,6 +2498,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1541935932}
+  - {fileID: 1964877891}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2935,6 +2970,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45977bbae16431c46a013576a1aea384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1964877890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1964877891}
+  m_Layer: 0
+  m_Name: StageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1964877891
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964877890}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1523691034}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &1969492197 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 4833140658110732890, guid: 04547545585a8d94783eef73e12f1649, type: 3}
@@ -3413,11 +3479,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2937973208420336866, guid: a67262a701d863b4d8f8514ec4c8a2a7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 264
+      value: 289
       objectReference: {fileID: 0}
     - target: {fileID: 2937973208420336866, guid: a67262a701d863b4d8f8514ec4c8a2a7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 670
+      value: 617
       objectReference: {fileID: 0}
     - target: {fileID: 2937973208420336866, guid: a67262a701d863b4d8f8514ec4c8a2a7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3461,3 +3527,8 @@ PrefabInstance:
       objectReference: {fileID: 1925488629}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a67262a701d863b4d8f8514ec4c8a2a7, type: 3}
+--- !u!1 &8117358310120169215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4039129382588587137, guid: a67262a701d863b4d8f8514ec4c8a2a7, type: 3}
+  m_PrefabInstance: {fileID: 8117358310120169214}
+  m_PrefabAsset: {fileID: 0}
