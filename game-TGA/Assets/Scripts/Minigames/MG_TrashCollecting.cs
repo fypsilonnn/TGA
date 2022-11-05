@@ -21,7 +21,7 @@ public class MG_TrashCollecting : MonoBehaviour
             trashPos.Set(x, trashYCoord, 0f);
             bag.transform.position = trashPos;
         }
-        display.text = "You have collected " + piecesCollected + " out of 10 trash pieces";
+         display.text = "You have collected " + piecesCollected + " out of 10 trash pieces";
     }
     
     private void FixedUpdate() {
@@ -30,7 +30,7 @@ public class MG_TrashCollecting : MonoBehaviour
             
         }
     }
-    public void updateDisplay() {
+    public void UpdateDisplay() {
         display.text = "You have collected " + piecesCollected + " out of 10 trash pieces";
     }
 

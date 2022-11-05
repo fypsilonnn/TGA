@@ -5,16 +5,16 @@ using TMPro;
 
 public class QuestHandler : MonoBehaviour, IDataPersistence
 {
-    public GameObject[] trigger = new GameObject[3]; //TODO - determine sizes
+    public GameObject[] trigger; //TODO - determine sizes
 
-    public TMP_Text activeQuest;
+    public TMP_Text activeQuestText;
 
     private string currentQuest;
-    public List<string> questNames = new List<string>();
-    //public List<GameObject> trigger = new List<GameObject>();
-    public SerializableDictionary<string, bool> questProgress = new SerializableDictionary<string, bool>();
-    public SerializableDictionary<string, string> questDescriptions = new SerializableDictionary<string, string>();
-    public SerializableDictionary<string, string> questTriggers = new SerializableDictionary<string, string>();
+    private List<string> questNames = new List<string>();
+    
+    private SerializableDictionary<string, bool> questProgress = new SerializableDictionary<string, bool>();
+    private SerializableDictionary<string, string> questDescriptions = new SerializableDictionary<string, string>();
+    private SerializableDictionary<string, string> questTriggers = new SerializableDictionary<string, string>();
 
     public void LoadData(GameData data) {
         this.currentQuest = data.currentQuest;
@@ -25,7 +25,7 @@ public class QuestHandler : MonoBehaviour, IDataPersistence
         //TODO - make a savefile for the descriptions and make the program read it from there instead of the dictionary (?)
 
         //set the current description
-        activeQuest.text = questDescriptions[currentQuest];
+        activeQuestText.text = questDescriptions[currentQuest];
     }
 
     public void SaveData(GameData data) {
@@ -34,7 +34,7 @@ public class QuestHandler : MonoBehaviour, IDataPersistence
     }
 
     //create texts in the quests popup that display the active quest
-    public void markQuestFinished() {
+    public void MarkQuestFinished() {
         if(this.questProgress.ContainsKey(currentQuest)) {
             this.questProgress[currentQuest] = true;
             //int currentTrigger = questNames.IndexOf(currentQuest);
@@ -43,17 +43,26 @@ public class QuestHandler : MonoBehaviour, IDataPersistence
 
             //check if there are more quests left after the one just finished, else say that there are no more quests
             if(questNames.IndexOf(currentQuest) == questNames.Count - 1) {
-                activeQuest.text = "There are no more quests to be done, you finished what's currently in the game";
-            } else if((descriptionToChange.Equals(activeQuest.text) || activeQuest.text.Equals("")) && questNames.IndexOf(currentQuest) < questNames.Count - 1 && questTriggers[currentQuest].Equals(trigger[questNames.IndexOf(currentQuest)].name)) {
-                activeQuest.text = questDescriptions[questNames[questNames.IndexOf(currentQuest) + 1]];
+                activeQuestText.text = "There are no more quests to be done, you finished what's currently in the game";
+            } 
+            
+            //check if you activated the right trigger, if the update description and completion
+            else if((descriptionToChange.Equals(activeQuestText.text) || activeQuestText.text.Equals("")) && questNames.IndexOf(currentQuest) < questNames.Count - 1 && questTriggers[currentQuest].Equals(trigger[questNames.IndexOf(currentQuest)].name)) {
+                activeQuestText.text = questDescriptions[questNames[questNames.IndexOf(currentQuest) + 1]];
                 currentQuest = questNames[questNames.IndexOf(currentQuest) + 1];
-            } else if(questTriggers[currentQuest].Equals(trigger[questNames.IndexOf(currentQuest)].name)) {
-
-            } else {
+            } 
+            
+            //do nothing if player just talked to the wrong person
+            else if(questTriggers[currentQuest].Equals(trigger[questNames.IndexOf(currentQuest)].name)) {
+                return;
+            } 
+            
+            //error logging
+            else {
                 Debug.LogError("Something went wrong while trying to update the quest description.");
             } 
         } else {
-            Debug.LogError("Something was wrong while getting the current quest.");
+            Debug.LogError("Something went wrong while getting the current quest.");
         }
     }
 
