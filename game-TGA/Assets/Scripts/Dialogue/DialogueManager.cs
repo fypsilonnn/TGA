@@ -8,6 +8,8 @@ public class DialogueManager : MonoBehaviour
     public TMP_Text nameText;
     public TMP_Text dialogueText;
 
+    public GameObject gameUI;
+
     public GameObject dialogueBox;
 
     private Queue<string> sentences = new Queue<string>();
@@ -17,6 +19,9 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue) {
 
         sentences.Clear();
+        speakers.Clear();
+
+        gameUI.SetActive(false);
 
         foreach(string sentence in dialogue.sentences) {
             sentences.Enqueue(sentence);
@@ -45,5 +50,6 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue() {
         //TODO - start next thing, e.g. minigame
         dialogueBox.SetActive(false);
+        gameUI.SetActive(true);
     }
 } 

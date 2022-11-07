@@ -90,4 +90,9 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
             rigidbody2D.rotation = maxRotation;
         }
     }
+
+    //TODO - why the fuck wont you work how youre supposed to?
+    public void SetPlayerPosition(int[] pos) {
+        transform.Translate(new Vector3(pos[0] - transform.position.x, pos[1] - transform.position.y, 0));
+    }
 }

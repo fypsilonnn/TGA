@@ -1228,6 +1228,7 @@ MonoBehaviour:
   - {fileID: 54083556}
   - {fileID: 31497915}
   - {fileID: 1323166345}
+  starter: {fileID: 935735635}
   piecesCollected: 0
   display: {fileID: 811308329}
 --- !u!4 &935735637
@@ -1434,7 +1435,6 @@ GameObject:
   - component: {fileID: 1140523607}
   - component: {fileID: 1140523606}
   - component: {fileID: 1140523605}
-  - component: {fileID: 1140523609}
   - component: {fileID: 1140523608}
   m_Layer: 0
   m_Name: Oliver
@@ -1450,14 +1450,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140523603}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1812, y: 650, z: -25.505686}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 2100, y: 640, z: -25.505686}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 395897355}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1140523605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1497,10 +1497,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1140523609}
+      - m_Target: {fileID: 1964877892}
         m_TargetAssemblyTypeName: QuestHandler, Assembly-CSharp
         m_MethodName: MarkQuestFinished
-        m_Mode: 1
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1140523603}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 811308328}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1508,6 +1520,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1140523606}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!61 &1140523606
 BoxCollider2D:
@@ -1604,27 +1628,32 @@ MonoBehaviour:
     speaker:
     - You
     - Oliver
+    - You
+    - Oliver
+    - You
+    - Oliver
+    - You
+    - Game
+    - Game
+    - Game
     sentences:
     - "Hey, what are you doing? Looks kind of interesting if I\u2019m being honest."
     - "G\u2019day mate I\u2019m currently collecting trash on this beach here. Because
       of the many tourists that visit this area, the amount of trash has only gotten
       more and more over the past few years, which is pretty harmful for the animals
       living in the ocean over there."
---- !u!114 &1140523609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1140523603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69b9fe522b510e948822520286ddd2a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trigger:
-  - {fileID: 1140523603}
-  activeQuestText: {fileID: 1953746462}
+    - "Oh, that\u2019s very nice of you, how come you\u2019re doing this?\r\n"
+    - "I\u2019m currently a volunteer at an environmental protection group. We\u2019re
+      collecting trash on the beaches three to four times a week, so hopefully the
+      beaches become \u2026 less littered, at least for a while.\r\n"
+    - "Do you by any chance need some help with that? Honestly, it looks like there\u2019s
+      still a lot to do and I have a bit of free time on my hands right now.\r\n"
+    - "Sure, if ya got nothin else to do, I won\u2019t mind you helping. "
+    - Alright, we better get started then!
+    - 'The next few Slides will explain the following Minigame. '
+    - In order to collect the trashbags strewn over the beach, tap on them
+    - When new games are introduced, they will be explained in similar manner.
+    speakingPosition: 530700001c02000000000000
 --- !u!1 &1159499313
 GameObject:
   m_ObjectHideFlags: 0
@@ -2272,7 +2301,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865415487}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1068, y: 784, z: -4.494314}
+  m_LocalPosition: {x: 1706, y: 596, z: -4.494314}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2316,8 +2345,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1964877891}
+  - component: {fileID: 1964877892}
   m_Layer: 0
-  m_Name: StageManager
+  m_Name: QuestManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2338,6 +2368,22 @@ Transform:
   m_Father: {fileID: 1523691034}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1964877892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964877890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b9fe522b510e948822520286ddd2a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger:
+  - {fileID: 1140523603}
+  - {fileID: 935735635}
+  activeQuestText: {fileID: 1953746462}
 --- !u!20 &1969492197 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 4833140658110732890, guid: 04547545585a8d94783eef73e12f1649, type: 3}
@@ -2490,6 +2536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 2168807262790058577}
   dialogueText: {fileID: 2168807262790058576}
+  gameUI: {fileID: 478110696}
   dialogueBox: {fileID: 611749220}
 --- !u!1001 &497642647558531980
 PrefabInstance:
@@ -2509,6 +2556,22 @@ PrefabInstance:
     - target: {fileID: 497642646774496043, guid: ea09f87a83454b14682538f0827bb8cb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 497642646982861477, guid: ea09f87a83454b14682538f0827bb8cb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 497642646982861477, guid: ea09f87a83454b14682538f0827bb8cb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 497642646982861477, guid: ea09f87a83454b14682538f0827bb8cb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 811308328}
+    - target: {fileID: 497642646982861477, guid: ea09f87a83454b14682538f0827bb8cb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 497642647489398884, guid: ea09f87a83454b14682538f0827bb8cb, type: 3}
       propertyPath: m_Name
@@ -2794,11 +2857,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4833140658110732889, guid: 04547545585a8d94783eef73e12f1649, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1068
+      value: 1706
       objectReference: {fileID: 0}
     - target: {fileID: 4833140658110732889, guid: 04547545585a8d94783eef73e12f1649, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 784
+      value: 596
       objectReference: {fileID: 0}
     - target: {fileID: 4833140658110732889, guid: 04547545585a8d94783eef73e12f1649, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2993,15 +3056,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2937973208420336866, guid: a67262a701d863b4d8f8514ec4c8a2a7, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2937973208420336866, guid: a67262a701d863b4d8f8514ec4c8a2a7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1068
+      value: 1706
       objectReference: {fileID: 0}
     - target: {fileID: 2937973208420336866, guid: a67262a701d863b4d8f8514ec4c8a2a7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 730
+      value: 542
       objectReference: {fileID: 0}
     - target: {fileID: 2937973208420336866, guid: a67262a701d863b4d8f8514ec4c8a2a7, type: 3}
       propertyPath: m_LocalPosition.z

@@ -8,5 +8,7 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue() {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+
+        FindObjectOfType<PlayerMovement>().SetPlayerPosition(dialogue.speakingPosition);
     }
 }

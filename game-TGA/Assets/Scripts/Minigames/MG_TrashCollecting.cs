@@ -6,11 +6,14 @@ using TMPro;
 
 public class MG_TrashCollecting : MonoBehaviour
 {
+    private bool sendMGEnding;
     public int trashMinXCoord = 1500;
     public int trashMaxXCoord = 10000;
     public float trashYCoord = 400;
     System.Random rand = new System.Random();
     public GameObject[] trashbags = new GameObject[10];
+
+    public GameObject starter;
 
     public int piecesCollected = 0;
     public TMP_Text display; 
@@ -25,14 +28,31 @@ public class MG_TrashCollecting : MonoBehaviour
     }
     
     private void FixedUpdate() {
-        if(piecesCollected == 10) {
-            //TODO - end minigame
-            
+        if(piecesCollected == trashbags.Length && !sendMGEnding) {
+            sendMGEnding = true;
+            EndMG();
         }
+        int inactiveBagsTemp = 0;
+        foreach (GameObject bag in trashbags) {
+            if (!bag.activeInHierarchy) {
+                inactiveBagsTemp++;
+            }
+        }
+        piecesCollected = inactiveBagsTemp;
+        UpdateDisplay();
     }
     public void UpdateDisplay() {
         display.text = "You have collected " + piecesCollected + " out of 10 trash pieces";
     }
 
     //TODO - closing the minigame once all bags were collected
+    public void EndMG() {
+        //update quest
+        FindObjectOfType<QuestHandler>().MarkQuestFinished(starter);
+
+        //make the info template disappear
+        display.gameObject.SetActive(false);
+
+        //TODO - Oliver2 talkable
+    }
 }

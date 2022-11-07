@@ -47,14 +47,14 @@ public class GameData
 
         questNames = new List<string> {
             "1-1_meetOliver", 
-            "1-1_exampleQuest1", 
-            "1-1_deineMudda"
+            "1-1_cleanTheBeach", 
+            "1-1_talkToOliverAgain"
         };
 
         descriptions = new List<string> {
-            "Meet Oliver at the beach",
-            "Ich bin eine Testbeschreibung",
-            "jaja deine Mutter und so"
+            "Meet Oliver at the beach.",
+            "Help Oliver to clean up the beach.",
+            "Talk to Oliver again."
         };
 
         //<questName, hasFinished?>
@@ -72,7 +72,7 @@ public class GameData
 
         questTriggers = new SerializableDictionary<string, string> {
             {questNames[0] , "Oliver"},
-            {questNames[1], "temp"},
+            {questNames[1], "MG_Trashbags"},
             {questNames[2], "temp2"}
         };
     }

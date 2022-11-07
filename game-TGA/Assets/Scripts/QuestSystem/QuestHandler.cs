@@ -5,8 +5,7 @@ using TMPro;
 
 public class QuestHandler : MonoBehaviour, IDataPersistence
 {
-    public GameObject[] trigger; //TODO - determine sizes
-
+    public GameObject[] trigger; 
     public TMP_Text activeQuestText;
 
     private string currentQuest;
@@ -34,7 +33,7 @@ public class QuestHandler : MonoBehaviour, IDataPersistence
     }
 
     //create texts in the quests popup that display the active quest
-    public void MarkQuestFinished() {
+    public void MarkQuestFinished(GameObject startingObject) {
         if(this.questProgress.ContainsKey(currentQuest)) {
             this.questProgress[currentQuest] = true;
             //int currentTrigger = questNames.IndexOf(currentQuest);
@@ -47,7 +46,7 @@ public class QuestHandler : MonoBehaviour, IDataPersistence
             } 
             
             //check if you activated the right trigger, if the update description and completion
-            else if((descriptionToChange.Equals(activeQuestText.text) || activeQuestText.text.Equals("")) && questNames.IndexOf(currentQuest) < questNames.Count - 1 && questTriggers[currentQuest].Equals(trigger[questNames.IndexOf(currentQuest)].name)) {
+            else if((descriptionToChange.Equals(activeQuestText.text) || activeQuestText.text.Equals("")) && questNames.IndexOf(currentQuest) < questNames.Count - 1 && questTriggers[currentQuest].Equals(startingObject.name)) {
                 activeQuestText.text = questDescriptions[questNames[questNames.IndexOf(currentQuest) + 1]];
                 currentQuest = questNames[questNames.IndexOf(currentQuest) + 1];
             } 
