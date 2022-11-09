@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     }
 
     private void Jump() {
-        if (IsGrounded.isGrounded && (joystick.Vertical > 0.3f  || JumpPressed.jumpPressed) && rigidbody2D.velocity.y == 0f) {
+        if (IsGrounded.isGrounded && (joystick.Vertical > 0.3f  || JumpPressed.jumpPressed) && Math.Abs(rigidbody2D.velocity.y) < 0.5f) {
             rigidbody2D.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
         }
     }
