@@ -6,24 +6,16 @@ using UnityEngine.SceneManagement;
 public class WorldMenu : MonoBehaviour, IDataPersistence
 {
     private int[] stageToLoad = new int[3];
-
-    private Dictionary<int[], string> stageIndexes = new SerializableDictionary<int[], string>();
+    private SerializableDictionary<string, string> stageIndexes = new SerializableDictionary<string, string>();
 
     public void LoadData(GameData data) {
-        stageToLoad = data.stage;
+        this.stageToLoad = data.stage;
 
-        foreach(KeyValuePair<int[], string> kvp in this.stageIndexes) {
-            Debug.Log("Key: " + kvp.Key);
-            Debug.Log("Value: " + kvp.Value);
-        }
+        Debug.Log("load1: " + stageToLoad[0] + "data: " + data.stage[0]);
+        Debug.Log("load2: " + stageToLoad[1] + "data: " + data.stage[1]);
+        Debug.Log("load3: " + stageToLoad[2] + "data: " + data.stage[2]);
 
-        for(int i = 0; i < data.indexKeys0.Count; i++) {
-            int[] index = new int[3];
-            index[0] = data.indexKeys0[i];
-            index[1] = data.indexKeys1[i];
-            index[2] = data.indexKeys2[i];
-            stageIndexes.Add(index, data.stageNames[i]);
-        }
+        this.stageIndexes = data.stageIndexes;
     }
 
     public void SaveData(GameData data) {
@@ -31,7 +23,9 @@ public class WorldMenu : MonoBehaviour, IDataPersistence
     }
 
     public void PlayLevelOne() {
+
         //TODO Load the correct stage
-        SceneManager.LoadScene(stageIndexes[stageToLoad]);
+
+        SceneManager.LoadScene(stageIndexes[stageToLoad[0].ToString() + "-" + stageToLoad[1].ToString() + "-" + stageToLoad[2].ToString()]);
     }
 }

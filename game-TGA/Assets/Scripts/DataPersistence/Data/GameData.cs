@@ -10,10 +10,8 @@ public class GameData
     //stages are divided in stages and substages
     //e.g. stage[0] = mainstage -> SDG 14; stage[1] = substage -> over acidification or oil from wreck; stage[2] = part of substage -> the beach, planting the seaweed
     public int[] stage = new int[3];
-    public List<int> indexKeys0;
-    public List<int> indexKeys1;
-    public List<int> indexKeys2;
-    public List<string> stageNames;
+
+    public SerializableDictionary<string, string> stageIndexes;
 
     //this will be used to store the vector of the player position because Vector3 is not serializable
         //NOTE: ok, apparently vectors would be serializable but it is what it is
@@ -62,24 +60,9 @@ public class GameData
         playerPosition[1] = 750;    //y
         playerPosition[2] = 0;      //z
 
-        indexKeys0 = new List<int> {
-            1,
-            1
-        };
-
-        indexKeys1 = new List<int> {
-            1,
-            1
-        };
-
-        indexKeys2 = new List<int> {
-            1,
-            2
-        };
-
-        stageNames = new List<string> {
-            "LevelOneBeach",
-            "LevelOneKelp"
+        stageIndexes = new SerializableDictionary<string, string> {
+            {"1-1-1", "LevelOneBeach"},
+            {"1-1-2", "LevelOneKelp"}
         };
 
         #endregion
