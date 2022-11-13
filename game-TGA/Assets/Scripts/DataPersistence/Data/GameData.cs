@@ -5,13 +5,23 @@ using UnityEngine;
 [System.Serializable]
 public class GameData 
 {
+    #region Player
+
     //stages are divided in stages and substages
-    //e.g. stage[0] = mainstage -> SDG 14; stage[1] = substage -> over acidification or oil from wreck
+    //e.g. stage[0] = mainstage -> SDG 14; stage[1] = substage -> over acidification or oil from wreck; stage[2] = part of substage -> the beach, planting the seaweed
     public int[] stage = new int[3];
+    public List<int> indexKeys0;
+    public List<int> indexKeys1;
+    public List<int> indexKeys2;
+    public List<string> stageNames;
 
     //this will be used to store the vector of the player position because Vector3 is not serializable
         //NOTE: ok, apparently vectors would be serializable but it is what it is
     public float[] playerPosition = new float[3];
+
+    #endregion
+
+    #region Quests
 
     //the current Quest
     public string currentQuest;
@@ -31,10 +41,19 @@ public class GameData
     //saving which game objects are finishing triggers for which quests
     public SerializableDictionary<string, string> questTriggers;
 
+    #endregion
+
+    #region Minigames
+
+    public int trashbagsCollected;
+
+    #endregion
     //values defined in constructor will be the default values
     //this is used by the game if there is no data to load
     public GameData() {
-        //TODO - load correct stage 
+
+        #region Player
+ 
         stage[0] = 1;
         stage[1] = 1;
         stage[2] = 1;
@@ -42,6 +61,30 @@ public class GameData
         playerPosition[0] = 260;    //x
         playerPosition[1] = 750;    //y
         playerPosition[2] = 0;      //z
+
+        indexKeys0 = new List<int> {
+            1,
+            1
+        };
+
+        indexKeys1 = new List<int> {
+            1,
+            1
+        };
+
+        indexKeys2 = new List<int> {
+            1,
+            2
+        };
+
+        stageNames = new List<string> {
+            "LevelOneBeach",
+            "LevelOneKelp"
+        };
+
+        #endregion
+
+        #region Quests
 
         currentQuest = "1-1_meetOliver";
 
@@ -75,5 +118,14 @@ public class GameData
             {questNames[1], "MG_Trashbags"},
             {questNames[2], "temp2"}
         };
+
+        #endregion
+
+        #region Minigames
+
+        trashbagsCollected = 0;
+
+        #endregion
+
     }
 }

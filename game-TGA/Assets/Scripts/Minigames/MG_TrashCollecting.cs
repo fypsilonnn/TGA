@@ -4,8 +4,10 @@ using UnityEngine;
 using System;
 using TMPro;
 
-public class MG_TrashCollecting : MonoBehaviour
+public class MG_TrashCollecting : MonoBehaviour, IDataPersistence
 {
+    #region vars
+
     private bool sendMGEnding;
     public int trashMinXCoord = 1500;
     public int trashMaxXCoord = 10000;
@@ -17,7 +19,19 @@ public class MG_TrashCollecting : MonoBehaviour
 
     public int piecesCollected = 0;
     public TMP_Text display; 
+
+    #endregion
+
+    public void LoadData(GameData data) {
+        piecesCollected = data.trashbagsCollected;
+    }
+
+    public void SaveData(GameData data) {
+        data.trashbagsCollected = piecesCollected;
+    }
+
     private void Start() {
+        //TODO - change to take in already collected bags from previous saves -> guids
         foreach (GameObject bag in trashbags) {
             float x = (float)(rand.Next(trashMinXCoord, trashMaxXCoord));
             Vector3 trashPos = new Vector3();
@@ -45,7 +59,7 @@ public class MG_TrashCollecting : MonoBehaviour
         display.text = "You have collected " + piecesCollected + " out of 10 trash pieces";
     }
 
-    //TODO - closing the minigame once all bags were collected
+    //closing the minigame once all bags were collected
     public void EndMG() {
         //update quest
         FindObjectOfType<QuestHandler>().MarkQuestFinished(starter);
