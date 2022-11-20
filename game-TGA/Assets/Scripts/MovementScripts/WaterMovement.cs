@@ -6,10 +6,10 @@ public class WaterMovement : MonoBehaviour, IDataPersistence
 {
     #region vars
     private Vector3 _currentPosition;
-    public float movementSpeed;
+    [SerializeField] private float movementSpeed;
     private float _horizontalInput;
     private float _verticalInput;
-    public Joystick joystick;
+    [SerializeField] private Joystick joystick;
 
     #endregion
 

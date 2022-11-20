@@ -5,51 +5,51 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
-    public TMP_Text nameText;
-    public TMP_Text dialogueText;
+    [SerializeField] private TMP_Text _nameText;
+    [SerializeField] private TMP_Text _dialogueText;
 
-    public GameObject gameUI;
+    [SerializeField] private GameObject _gameUI;
 
-    public GameObject dialogueBox;
+    [SerializeField] private GameObject _dialogueBox;
 
-    private Queue<string> sentences = new Queue<string>();
+    private Queue<string> _sentences = new Queue<string>();
 
-    private Queue<string> speakers = new Queue<string>();
+    private Queue<string> _speakers = new Queue<string>();
 
     public void StartDialogue(Dialogue dialogue) {
 
-        sentences.Clear();
-        speakers.Clear();
+        _sentences.Clear();
+        _speakers.Clear();
 
-        gameUI.SetActive(false);
+        _gameUI.SetActive(false);
 
         foreach(string sentence in dialogue.sentences) {
-            sentences.Enqueue(sentence);
+            _sentences.Enqueue(sentence);
         }
 
         foreach(string name in dialogue.speaker) {
-            speakers.Enqueue(name);
+            _speakers.Enqueue(name);
         }
 
         DislplayNextSentence();
     }
 
     public void DislplayNextSentence() {
-        if (sentences.Count == 0) {
+        if (_sentences.Count == 0) {
             EndDialogue();
             return;
         }
 
-        string nameToDisplay = speakers.Dequeue();
-        nameText.text = nameToDisplay;
+        string nameToDisplay = _speakers.Dequeue();
+        _nameText.text = nameToDisplay;
 
-        string lineToSay = sentences.Dequeue();
-        dialogueText.text = lineToSay;
+        string lineToSay = _sentences.Dequeue();
+        _dialogueText.text = lineToSay;
     }
 
     public void EndDialogue() {
         //TODO - start next thing, e.g. minigame
-        dialogueBox.SetActive(false);
-        gameUI.SetActive(true);
+        _dialogueBox.SetActive(false);
+        _gameUI.SetActive(true);
     }
 } 

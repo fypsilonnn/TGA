@@ -12,20 +12,18 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
 
     private Vector3 _currentPosition;
 
-    public Joystick joystick;
+    [SerializeField] private Joystick _joystick;
     Rigidbody2D rigidbody2D;
 
     private bool _leftDown;
     private bool _rightDown;
 
-    public float movementSpeed = 200f;
-    public float jumpForce = 500f;
-    public float downForce = 200f;
+    [SerializeField] private float _movementSpeed = 200f;
+    [SerializeField] private float _jumpForce = 500f;
+    [SerializeField] private float _downForce = 200f;
     private float _horizontalInput;
-    private float _horizontalSpeed;
-    private float _verticalInput;
 
-    public float maxRotation = 45;
+    [SerializeField] private float _maxRotation = 45;
 
     #endregion
 
@@ -56,22 +54,21 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
 
     private void MovePlayer() {
         if ((!IsTouchingLeftWall.isTouchingLeftWall && !IsTouchingRightWall.isTouchingRightWall) || (IsTouchingLeftWall.isTouchingLeftWall && _horizontalInput >= 0) || (IsTouchingRightWall.isTouchingRightWall && _horizontalInput <= 0)) {
-            transform.Translate(new Vector3(_horizontalInput, 0, 0) * movementSpeed * Time.deltaTime);
+            transform.Translate(new Vector3(_horizontalInput, 0, 0) * _movementSpeed * Time.deltaTime);
         }
-        _horizontalInput = joystick.Horizontal;
-        _horizontalSpeed = _horizontalInput * movementSpeed;
+        _horizontalInput = _joystick.Horizontal;
         _currentPosition = rigidbody2D.position;
     }
 
     private void Jump() {
-        if (IsGrounded.isGrounded && (joystick.Vertical > 0.3f  || JumpPressed.jumpPressed) && Math.Abs(rigidbody2D.velocity.y) < 0.5f) {
-            rigidbody2D.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+        if (IsGrounded.isGrounded && (_joystick.Vertical > 0.3f  || JumpPressed.jumpPressed) && Math.Abs(rigidbody2D.velocity.y) < 0.5f) {
+            rigidbody2D.AddForce(new Vector2(0f, _jumpForce), ForceMode2D.Impulse);
         }
     }
 
     private void ShiftDown() {
-        if(!IsGrounded.downShiftUsed && !IsGrounded.isGrounded && (joystick.Vertical < -0.3f /*|| ShiftDownButtonPressed*/)) {
-            rigidbody2D.AddForce(new Vector2(0f, -downForce), ForceMode2D.Impulse);
+        if(!IsGrounded.downShiftUsed && !IsGrounded.isGrounded && (_joystick.Vertical < -0.3f /*|| ShiftDownButtonPressed*/)) {
+            rigidbody2D.AddForce(new Vector2(0f, -_downForce), ForceMode2D.Impulse);
             IsGrounded.downShiftUsed = true;
         }
     }
@@ -86,10 +83,10 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
 
     
     private void RotationController() {
-        if (rigidbody2D.rotation < -maxRotation) {
-            rigidbody2D.rotation = -maxRotation;
-        } else if (rigidbody2D.rotation > maxRotation) {
-            rigidbody2D.rotation = maxRotation;
+        if (rigidbody2D.rotation < -_maxRotation) {
+            rigidbody2D.rotation = -_maxRotation;
+        } else if (rigidbody2D.rotation > _maxRotation) {
+            rigidbody2D.rotation = _maxRotation;
         }
     }
     
